@@ -19,11 +19,11 @@ class ToDoList(models.Model):
 
 
 class Task(models.Model):
-    ## creator = models.ForeignKey(User, on_delete=models.CASCADE) IS it needed? IDK
     list = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now=True)
+    isFinished = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name) 

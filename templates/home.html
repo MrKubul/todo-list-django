@@ -2,10 +2,16 @@
 
 {% block content %}
 
-{% include 'navbar.html' %}
-
 <p>Witaj na stronie z todo_listami stwórz własną Todoliste poniżej!</p>
 
-<a href="{% url 'create-list' %}">Create New List>
+<a href="{% url 'create-list' %}">
+    <p>Create New List </p>
+    <hr>
+    <a href="{% url 'add-task' %}">
+    <p>Add Task</p>
+    <hr>
+    <a href="{% url 'list-view' %}">
+    <p>View your list</p>
+    <hr>
 
 {% endblock content %} 

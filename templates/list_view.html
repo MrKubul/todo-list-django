@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% include 'navbar.html' %}
+
+{% block content %}
+
+<h1>Tu pokażą się wszystkie twoje listy z ich zadaniami</h1>
+
+<div>
+    {% for todo_lista in todo_lists %}
+        {% if todo_lista.owner == request.user %}
+            <h5>Ta lista nazywa się {{todo_lista.list_name}}</h5>
+            <h5>Jej właściciel to {{todo_lista.owner}}</h5>
+            <a href="{% url 'update-list' todo_lista.id %}">Update this List</a>
+            <hr>
+            {% for task in tasks %}
+                {% if  task.list.owner == request.user%}
+                    <h5>{{task.name}}</h5>
+                    <input type="checkbox" id={{task.id}}>
+                    <h5>{{task.description}}</h5>
+                    <a href="{% url 'update-task' task.id %}">
+                        <p>Update task</p>
+                    <hr>
+                    <a href="{% url 'delete-task' task.id %}">
+                        <p>delete task</p>
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %} 
