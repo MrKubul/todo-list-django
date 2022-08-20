@@ -1,31 +1,54 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import User, Task, ToDoList
 from .forms import ListForm, TaskForm
 from django.shortcuts import redirect
 
 def login_page(request):
+    page = 'login'
 
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        _username = request.POST.get('username')
+        _password = request.POST.get('password')
 
         try:
-            user = User.objects.get(username = username)
+            user = User.objects.get(username = _username)
         except:
             messages.error(request, 'User does not exists')
 
-        user.authenticate(request, username=username, password=password)
+        user = authenticate(request, username=_username, password=_password)
         if user is not None:
+            user.username = user.username.lower()
             login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'username or password doesnt exist')
 
-    context = {}
-    return(request, 'login_and_registration.html', context)
+    context = {"page": page}
+    return render(request, 'login_and_registration.html', context)
 
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
+def register_user(request):
+    form = UserCreationForm()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "sth went wrong")
+
+    context = {"form": form}
+    return render(request, 'login_and_registration.html', context)
 
 def home(request):
     return render(request, 'home.html')
@@ -59,6 +82,8 @@ def add_task(request):
         if form.is_valid():
             form.save()
             return redirect('list-view')
+        else:
+            messages.error(request, "nie towja tablica, zostaw!!!")
     form = TaskForm()
     context = {"form": form}
     return render(request, 'create_task_form.html', context)
