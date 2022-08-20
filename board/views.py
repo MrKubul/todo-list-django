@@ -103,9 +103,11 @@ def add_task(request):
 def update_task(request, pk):
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
-    if form.is_valid():
-            form.save()
-            return redirect('list-view')
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+                form.save()
+                return redirect('list-view')
     context = {"form": form}
     return render(request, 'create_task_form.html', context)
 
