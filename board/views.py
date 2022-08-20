@@ -76,6 +76,18 @@ def create_list(request):
     context = {"form": form}
     return render(request, 'create_list_form.html', context)
 
+def update_list(request, pk):
+    listToUpdate = ToDoList.objects.get(id=pk)
+    form = ListForm(instance = listToUpdate)
+
+    if request.method == 'POST':
+        form = ListForm(request.POST, instance=listToUpdate)
+        if form.is_valid():
+            form.save()
+            return redirect('list-view')
+    context = {"form": form}
+    return render(request, 'create_list_form.html', context)
+
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
