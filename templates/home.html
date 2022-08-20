@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<p>Witaj na stronie z todo_listami stwórz własną Todoliste poniżej!</p>
+
+<a href="{% url 'create-list' %}">Create New List>
+
+{% endblock content %} 

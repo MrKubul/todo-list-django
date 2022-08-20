@@ -1,0 +1,18 @@
+
+{% include 'navbar.html' %}
+
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Tu pokażą się wszystkie listy z ich zadaniami</h1>
+
+<div>
+    {% for todo_lista in todo_lists %}
+        <h5>Ta lista nazywa się {{todo_lista.list_name}}</h5>
+        <h5>Jej właściciel to {{todo_lista.owner}}</h5>
+        <a href="{% url 'add-task' %}">Add new Task to this List>
+        <br>
+    {% endfor %}
+</div>
+{% endblock content %} 
