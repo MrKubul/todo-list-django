@@ -19,7 +19,7 @@
             {% for task in tasks %}
                 {% if  task.list.owner == request.user and task.list == todo_lista %}
                     <h5>{{task.name}}</h5>
-                    <input type="checkbox" id={{task.id}}>
+                    <input type="checkbox" id={{task.id}} {% if task.isFinished %} checked="checked" {% endif %} />
                     <h5>{{task.description}}</h5>
                     <a href="{% url 'update-task' task.id %}">
                         <p>Update task</p>
