@@ -4,22 +4,34 @@
 
 {% block content %}
 
-<a href="{% url 'add-task' %}">
-    <p>Add Task</p>
-    <hr>
-<h1>Tu pokażą się wszystkie twoje listy z ich zadaniami</h1>
+<h1>These are your todo lists: </h1>
 
 <div>
     {% for todo_lista in todo_lists %}
-            <h5>Ta lista nazywa się {{todo_lista.list_name}}</h5>
-            <a href="{% url 'update-list' todo_lista.id %}">Update this List</a>
-            <a href="{% url 'add-task'%}">Add Task</a>
+    <hr>
+    <hr>
+    <hr>
+            <h5>'list_name' = {{todo_lista.list_name}}</h5>
+            <a href="{% url 'update-list' todo_lista.id %}">Update this List settings</a>
+            <a href="{% url 'delete-list' todo_lista.id %}">Delete this list</a>
+            <br>
+            <br>
+            <div>
+                <p>Add new task here:
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" value="Submit" />
+                    <input type="hidden" value={{todo_lista.list_name}} name='list_name'>
+                </form> 
+            </div>
             <hr>
+            <p>'tasks on the list': </p>
             {% for task in tasks %}
                 {% if task.list == todo_lista %}
-                    <h5>{{task.name}}</h5>
+                    <h5>'task_name' = {{task.name}}</h5>
                     <input type="checkbox" id={{task.id}} {% if task.isFinished %} checked="checked" {% endif %} />
-                    <h5>{{task.description}}</h5>
+                    <h5>'task_description' = {{task.description}}</h5>
                     <a href="{% url 'update-task' task.id %}">
                         <p>Update task</p>
                     <hr>
@@ -29,21 +41,8 @@
                 {% endif %}
             {% endfor %}
     {% endfor %}
+    <hr>
+    <hr>
+    <hr>
 </div>
 {% endblock content %}
-
-
-<div id="myDIV" class="header">
-    <h2>My To Do List</h2>
-    <input type="text" id="myInput" placeholder="Title...">
-    <span onclick="newElement()" class="addBtn">Add</span>
-  </div>
-  
-  <ul id="myUL">
-    <li>Hit the gym</li>
-    <li class="checked">Pay bills</li>
-    <li>Meet George</li>
-    <li>Buy eggs</li>
-    <li>Read a book</li>
-    <li>Organize office</li>
-  </ul>

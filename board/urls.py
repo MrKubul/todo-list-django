@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('list-view/', views.list_view, name = "list-view"),
     path('update-list/<str:pk>', views.update_list, name = "update-list"),
-    path('add-task/', views.add_task, name = "add-task"),
+    path('delete-list/<str:pk>', views.delete_list, name = "delete-task"),
     path('update-task/<str:pk>', views.update_task, name = "update-task"),
     path('delete-task/<str:pk>', views.delete_task, name = "delete-task"),
 ] 

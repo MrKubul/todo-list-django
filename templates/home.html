@@ -1,21 +1,23 @@
 {% extends 'main.html' %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+        <p>Hello {{request.user.username}}!, create new list or view those alreay created!</p>
+        <br><br>
+        <p>Create New List </p>
+        <div>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Submit" />
+            </form> 
+        </div>
 
-<p>Welcome to TODO list web app, create new list or view those alreay created!</p>
-
-<p>Create New List </p>
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Submit" />
-    </form> 
-</div>
-
-<hr>
-<a href="{% url 'list-view' %}">
-<p>View your list</p>
-<hr>
-
+        <hr>
+        <a href="{% url 'list-view' %}">
+        <p>View your lists</p>
+        <hr>
+    {% else %}
+    <p>Welcome to TODO list web app, login to continue...</p>
+    {% endif %}
 {% endblock content %} 

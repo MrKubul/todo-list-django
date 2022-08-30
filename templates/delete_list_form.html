@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <p>Are you sure u want delete this list?</p>
+        <a href="{% url 'list-view' %}">Go back</a>
+        <input type="submit" value="Confirm" />
+    </form> 
+</div>
+
+{% endblock content %} 
