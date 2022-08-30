@@ -11,13 +11,12 @@
 
 <div>
     {% for todo_lista in todo_lists %}
-        {% if todo_lista.owner == request.user %}
             <h5>Ta lista nazywa się {{todo_lista.list_name}}</h5>
-            <h5>Jej właściciel to {{todo_lista.owner}}</h5>
             <a href="{% url 'update-list' todo_lista.id %}">Update this List</a>
+            <a href="{% url 'add-task'%}">Add Task</a>
             <hr>
             {% for task in tasks %}
-                {% if  task.list.owner == request.user and task.list == todo_lista %}
+                {% if task.list == todo_lista %}
                     <h5>{{task.name}}</h5>
                     <input type="checkbox" id={{task.id}} {% if task.isFinished %} checked="checked" {% endif %} />
                     <h5>{{task.description}}</h5>
@@ -29,7 +28,22 @@
                     <hr>
                 {% endif %}
             {% endfor %}
-        {% endif %}
     {% endfor %}
 </div>
-{% endblock content %} 
+{% endblock content %}
+
+
+<div id="myDIV" class="header">
+    <h2>My To Do List</h2>
+    <input type="text" id="myInput" placeholder="Title...">
+    <span onclick="newElement()" class="addBtn">Add</span>
+  </div>
+  
+  <ul id="myUL">
+    <li>Hit the gym</li>
+    <li class="checked">Pay bills</li>
+    <li>Meet George</li>
+    <li>Buy eggs</li>
+    <li>Read a book</li>
+    <li>Organize office</li>
+  </ul>

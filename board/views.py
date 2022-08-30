@@ -51,20 +51,6 @@ def register_user(request):
     return render(request, 'login_and_registration.html', context)
 
 def home(request):
-    return render(request, 'home.html')
-
-def list_view(request):
-    users = User.objects.all()
-    tasks = Task.objects.all()
-    todo_lists = ToDoList.objects.all()
-    context = {
-        "users": users,
-        "tasks": tasks,
-        "todo_lists": todo_lists
-    }
-    return render(request, 'list_view.html', context)
-
-def create_list(request):
     if request.method == 'POST':
         form = ListForm(request.POST)
         if form.is_valid():
@@ -74,7 +60,16 @@ def create_list(request):
 
     form = ListForm()
     context = {"form": form}
-    return render(request, 'create_list_form.html', context)
+    return render(request, 'home.html', context)
+
+def list_view(request):
+    tasks = Task.objects.filter(owner = request.user)
+    todo_lists = ToDoList.objects.filter(owner = request.user)
+    context = {
+        "tasks": tasks,
+        "todo_lists": todo_lists
+    }
+    return render(request, 'list_view.html', context)
 
 def update_list(request, pk):
     listToUpdate = ToDoList.objects.get(id=pk)

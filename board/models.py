@@ -11,6 +11,7 @@ class ToDoList(models.Model):
 
 class Task(models.Model):
     list = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now=True)

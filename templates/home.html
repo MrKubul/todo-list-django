@@ -2,16 +2,20 @@
 
 {% block content %}
 
-<p>Witaj na stronie z todo_listami stwórz własną Todoliste poniżej!</p>
+<p>Welcome to TODO list web app, create new list or view those alreay created!</p>
 
-<a href="{% url 'create-list' %}">
-    <p>Create New List </p>
-    <hr>
-    <a href="{% url 'add-task' %}">
-    <p>Add Task</p>
-    <hr>
-    <a href="{% url 'list-view' %}">
-    <p>View your list</p>
-    <hr>
+<p>Create New List </p>
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" />
+    </form> 
+</div>
+
+<hr>
+<a href="{% url 'list-view' %}">
+<p>View your list</p>
+<hr>
 
 {% endblock content %} 
