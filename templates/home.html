@@ -1,11 +1,14 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
     {% if request.user.is_authenticated %}
-        <p>Hello {{request.user.username}}!, create new list or view those alreay created!</p>
-        <br><br>
-        <p>Create New List </p>
-        <div>
+    <div class="welcome-message">
+        <p>Hello {{request.user.username}}, create new list or view those alreay created!</p>
+    </div>
+        <div class="form">
+            <p>Create New List </p>
             <form method="POST" action="">
                 {% csrf_token %}
                 {{form.as_p}}
@@ -14,10 +17,14 @@
         </div>
 
         <hr>
-        <a href="{% url 'list-view' %}">
-        <p>View your lists</p>
+        <form class="form">
+            <button class="log-button"formaction="{% url 'list-view'%}">View your lists</button>
+        </form>
         <hr>
     {% else %}
-    <p>Welcome to TODO list web app, login to continue...</p>
+    <div class="welcome-message">
+        <h1>Welcome to TODO list web app, login to continue...</h1>
+    </div>
+    <img src="{% static '/images/dog-sits.jpg' %}" class ="dog-image">
     {% endif %}
 {% endblock content %} 

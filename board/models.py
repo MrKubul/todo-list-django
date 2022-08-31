@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ToDoList(models.Model):
-    list_owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    list_name = models.CharField(max_length=200) ## user cant have two lists named the same
+    list_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    list_name = models.CharField(max_length=200) 
     created_time = models.DateTimeField(auto_now=True)
     due_date = models.DateField()
 

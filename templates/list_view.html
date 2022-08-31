@@ -2,47 +2,51 @@
 
 {% include 'navbar.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<h1>These are your todo lists: </h1>
-
-<div>
+<div class="list-view">
+    <h1>These are your todo lists: </h1>
     {% for todo_lista in todo_lists %}
-    <hr>
-    <hr>
-    <hr>
-            <h5>'list_name' = {{todo_lista.list_name}}</h5>
-            <a href="{% url 'update-list' todo_lista.id %}">Update this List settings</a>
-            <a href="{% url 'delete-list' todo_lista.id %}">Delete this list</a>
-            <br>
-            <br>
+        <div class="list-box">
+            <h2>{{todo_lista.list_name}}</h2>
+            <div class="btns">
+                <form>
+                    <button class="log-button"formaction="{% url 'update-list' todo_lista.id %}">update list</button>
+                </form>
+                <form>
+                    <button class="log-button"formaction="{% url 'delete-list' todo_lista.id %}">delete list</button>
+                </form>
+            </div>
+            <p>'tasks on the list': </p>
+            {% for task in tasks %}
+                {% if task.parent_list == todo_lista %}
+                <div class="task">
+                    <h3>{{task.name}}</h3>
+                    <input type="checkbox" id={{task.id}} {% if task.isFinished %} checked="checked" {% endif %} />
+                    <h5>'{{task.description}}</h5>
+                    <div class="btns">
+                        <form>
+                            <button class="log-button"formaction="{% url 'update-task' task.id %}">Update</button>
+                        </form>
+                        <form>
+                            <button class="log-button"formaction="{% url 'delete-task' task.id %}">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
             <div>
-                <p>Add new task here:
-                <form method="POST" action="">
+                <form class="form" method="POST" action="">
+                    <p>Add new task here:</p>
                     {% csrf_token %}
                     {{form.as_p}}
                     <input type="submit" value="Submit" />
                     <input type="hidden" value={{todo_lista.list_name}} name='list_name'>
                 </form> 
             </div>
-            <hr>
-            <p>'tasks on the list': </p>
-            {% for task in tasks %}
-                {% if task.list == todo_lista %}
-                    <h5>'task_name' = {{task.name}}</h5>
-                    <input type="checkbox" id={{task.id}} {% if task.isFinished %} checked="checked" {% endif %} />
-                    <h5>'task_description' = {{task.description}}</h5>
-                    <a href="{% url 'update-task' task.id %}">
-                        <p>Update task</p>
-                    <hr>
-                    <a href="{% url 'delete-task' task.id %}">
-                        <p>delete task</p>
-                    <hr>
-                {% endif %}
-            {% endfor %}
+        </div>
     {% endfor %}
-    <hr>
-    <hr>
-    <hr>
 </div>
 {% endblock content %}

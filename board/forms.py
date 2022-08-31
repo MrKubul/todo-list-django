@@ -15,5 +15,7 @@ class TaskForm(ModelForm):
         model = Task
         exclude = ['task_owner', 'parent_list'] 
         widgets = {
-            'due_date': forms.TextInput(attrs={'placeholder': 'month/day/year (numerically)'})
+            'due_date': forms.TextInput(attrs={'placeholder': 'month/day/year (numerically)'}),
+            'description': forms.Textarea(attrs={'rows': 2})
+
         }

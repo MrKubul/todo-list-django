@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html>
@@ -7,22 +9,18 @@
         <title>Twoja TODO lista</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}">
     </head>
     <body>
-        {% include 'navbar.html' %}
+        <div class="navbar">
+            {% include 'navbar.html' %}
+        </div>
 
-        {% if messages %}
-            <ul class="messages">
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-
+        <div class="content-block">
         {% block content%}
 
         {% endblock %}
+        </div>
 
         <script src="" async defer></script>
     </body>

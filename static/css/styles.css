@@ -1,0 +1,144 @@
+* {
+
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navbar-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.navbar-text h2 {
+    font-size: 50px;
+}
+
+.logo {
+    height: auto;
+    width: auto;
+    max-height: 80px;
+    margin: 10px;
+}
+
+.navbar-login {
+
+}
+
+.log-button {
+    transform: scale(2);
+    margin: 15px;
+}
+
+.messages {
+    background-color: red;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50vw;
+    margin: 5px;
+}
+
+.welcome-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    color: white;
+    margin: 20px;
+}
+
+.dog-image {
+    height: 55vh;
+    width: 100vw;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    padding: 5px;
+}
+
+.login-additional {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-additional h1 {
+    margin: 0%;
+    padding: 0%;
+}
+
+.form p {
+    margin: 2px;
+}
+
+.form ul {
+    margin: 2px;
+}
+
+.list-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.list-view h1 {
+    color: aqua;
+    background-color: chocolate;
+    text-decoration: wavy;
+}
+
+.list-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: lightcyan;
+    margin: 5px;
+}
+
+.list-box h2 {
+    color:indianred;
+    text-decoration: dotted;
+}
+
+.list-box .log-button {
+    transform: scale(0.7)
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightskyblue;
+    margin: 5px;
+}
+
+.task h3 {
+    color:lightgreen;
+    text-decoration: underline;
+}
